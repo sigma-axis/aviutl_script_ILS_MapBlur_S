@@ -1,0 +1,137 @@
+--[[
+MIT License
+Copyright (c) 2024 sigma-axis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+https://mit-license.org/
+]]
+
+--
+-- VERSION: v1.00
+--
+
+--------------------------------
+
+
+@Mapped Blur設定(拡大率指定)
+--track0:X,-2000,2000,0,0.1
+--track1:Y,-2000,2000,0,0.1
+--track2:回転,-720,720,0,0.01
+--track3:拡大率,0,1600,100,0.01
+--check0:回転に角度を追従,1
+--dialog:PI,_0=nil;
+obj.setanchor("track", 0);
+local x, y, angle, scale, sync_angle = obj.track0, obj.track1, obj.track2, obj.track3, obj.check0;
+if _0 then
+	local c0, t0, t1, t2, t3 = _0[0], _0[1], _0[2], _0[3], _0[4]; _0 = nil;
+	if type(c0) == "boolean" then sync_angle = c0;
+	elseif type(c0) == "number" then sync_angle = c0 ~= 0 end
+	x = tonumber(t0) or x;
+	y = tonumber(t1) or y;
+	angle = tonumber(t2) or angle;
+	scale = tonumber(t3) or scale;
+end
+local ils_blur = require "ILS_MapBlur_S";
+if not ils_blur.is_former_script(
+	"Mapped Blur設定(拡大率指定)",
+	"Mapped Blur設定(サイズ指定)",
+	"Mapped Blur設定(基準色指定)") then
+	ils_blur.settings_reset(false);
+end
+ils_blur.settings_byscale(x, y, math.pi / 180 * angle, sync_angle, scale / 100);
+
+@Mapped Blur設定(サイズ指定)
+--track0:X,-2000,2000,0,0.1
+--track1:Y,-2000,2000,0,0.1
+--track2:回転,-720,720,0,0.01
+--track3:サイズ,0,4000,200,1
+--check0:回転に角度を追従,1
+--dialog:PI,_0=nil;
+obj.setanchor("track", 0);
+local x, y, angle, size, sync_angle = obj.track0, obj.track1, obj.track2, obj.track3, obj.check0;
+if _0 then
+	local c0, t0, t1, t2, t3 = _0[0], _0[1], _0[2], _0[3], _0[4]; _0 = nil;
+	if type(c0) == "boolean" then sync_angle = c0;
+	elseif type(c0) == "number" then sync_angle = c0 ~= 0 end
+	x = tonumber(t0) or x;
+	y = tonumber(t1) or y;
+	angle = tonumber(t2) or angle;
+	size = tonumber(t3) or size;
+end
+local ils_blur = require "ILS_MapBlur_S";
+if not ils_blur.is_former_script(
+	"Mapped Blur設定(拡大率指定)",
+	"Mapped Blur設定(サイズ指定)",
+	"Mapped Blur設定(基準色指定)") then
+	ils_blur.settings_reset(false);
+end
+ils_blur.settings_bysize(x, y, math.pi / 180 * angle, sync_angle, size);
+
+@Mapped Blur設定(基準色指定)
+--track0:R基準,-255,510,128,0.1
+--track1:G基準,-255,510,128,0.1
+--track2:B直交,0,100,0,0.01
+--track3:ぼかし,0,200,0,1
+--check0:RG均一化(Rのみで指定),0
+--dialog:PI,_0=nil;
+local r, g, b, blur, uniform = obj.track0, obj.track1, obj.track2, obj.track3, obj.check0;
+if _0 then
+	local c0, t0, t1, t2, t3 = _0[0], _0[1], _0[2], _0[3], _0[4]; _0 = nil;
+	if type(c0) == "boolean" then uniform = c0;
+	elseif type(c0) == "number" then uniform = c0 ~= 0 end
+	r = tonumber(t0) or r;
+	g = tonumber(t1) or g;
+	b = tonumber(t2) or b;
+	blur = tonumber(t3) or blur;
+end
+local ils_blur = require "ILS_MapBlur_S";
+if not ils_blur.is_former_script(
+	"Mapped Blur設定(拡大率指定)",
+	"Mapped Blur設定(サイズ指定)",
+	"Mapped Blur設定(基準色指定)") then
+	ils_blur.settings_reset(true);
+end
+ils_blur.settings_color(r, uniform and r or g, b / 100, blur);
+
+@Mapped Blur
+--track0:順方向,-2000,2000,16
+--track1:直交方向,0,2000,0
+--track2:角度,-720,720,0,0.01
+--track3:相対位置,-100,100,0,0.01
+--check0:サイズ固定,1
+--dialog:ILシーン名,_1="scn1";現在フレーム/chk,_2=0;枠外延伸/chk,_3=1;精度,_4=256;PI,_0=nil;
+local name, curr_frame, ext_map, quality = _1, _2 == 1, _3 ~= 0, tonumber(_4) or 256;
+_1 = nil; _2 = nil; _3 = nil; _4 = nil;
+local flow, side, angle, rel_pos, keep_size = obj.track0, obj.track1, obj.track2, obj.track3, obj.check0;
+if _0 then
+	local c0, t0, t1, t2, t3 = _0[0], _0[1], _0[2], _0[3], _0[4]; _0 = nil;
+	if type(c0) == "boolean" then keep_size = c0;
+	elseif type(c0) == "number" then keep_size = c0 ~= 0 end
+	flow = tonumber(t0) or flow;
+	side = tonumber(t1) or side;
+	angle = tonumber(t2) or angle;
+	rel_pos = tonumber(t3) or rel_pos;
+end
+local ils_blur = require "ILS_MapBlur_S";
+local recall_settings = ils_blur.is_former_script(
+	"Mapped Blur設定(拡大率指定)",
+	"Mapped Blur設定(サイズ指定)",
+	"Mapped Blur設定(基準色指定)");
+ils_blur.apply(name, flow, side, math.pi / 180 * angle, rel_pos / 100, keep_size, ext_map, math.floor(math.max(quality, 1)), curr_frame, recall_settings, false);
