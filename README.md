@@ -243,10 +243,13 @@ https://mit-license.org/
 
 # Special Thanks
 
-このスクリプトの実装やパラメタ配分に当たっては Mr-Ojii 様のスクリプト RotBlur_M を参考にさせていただきました．この場を借りて感謝申し上げます．
+- このスクリプトの実装やパラメタ配分に当たっては Mr-Ojii 様のスクリプト RotBlur_M を参考にさせていただきました．この場を借りて感謝申し上げます．
 
-https://github.com/Mr-Ojii/AviUtl-RotBlur_M-Script
+  https://github.com/Mr-Ojii/AviUtl-RotBlur_M-Script
 
+- このスクリプトは karoterra 様の GLShaderKit を利用しています．大変強力なツールの配布に加え，サンプルスクリプトは大いに参考になりました．この場を借りて感謝申し上げます．
+
+  https://github.com/karoterra/aviutl-GLShaderKit
 
 #  連絡・バグ報告
 
