@@ -4,7 +4,7 @@
 
 被写界深度のような効果や風で流れるようなぼかしが可能です．
 
-[ダウンロードはこちら．](https://github.com/sigma-axis/aviutl_script_ILS_MapBlur_S/releases) \[紹介動画準備中...\]
+[ダウンロードはこちら．](https://github.com/sigma-axis/aviutl_script_ILS_MapBlur_S/releases) [紹介動画](https://www.nicovideo.jp/watch/sm44468536)
 
 ![マップブラーのデモ1](https://github.com/user-attachments/assets/5642a14b-f5c4-483b-8d8b-769f49b799e0) ![マップブラーのデモ2](https://github.com/user-attachments/assets/fc1c579d-dc93-4947-b4ba-726b6280cb23)
 
